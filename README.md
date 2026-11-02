@@ -51,3 +51,20 @@ POST /run
 - `app.py` — optional FastAPI demo
 - `sample_data/notes.txt` — fictional sample research notes
 - `requirements.txt` — FastAPI and Uvicorn, only needed for the API demo
+
+## Docker and CI
+
+Run the FastAPI demo in Docker (Docker is not needed to run the
+plain Python tool, which works without it):
+
+```bash
+docker build -t multi-agent-workflow .
+docker run -p 8000:8000 multi-agent-workflow
+```
+
+Then open http://localhost:8000/health
+
+GitHub Actions runs on every push and pull request: it installs
+requirements, compiles the Python files, runs the smoke test above,
+and builds the Docker image. A failing check means the code or the
+Dockerfile needs fixing before it is shared.
